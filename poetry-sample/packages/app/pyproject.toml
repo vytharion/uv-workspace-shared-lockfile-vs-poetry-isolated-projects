@@ -15,7 +15,7 @@ python = ">=3.11"
 shared-lib = { path = "../shared_lib", develop = true }
 
 [tool.poetry.group.dev.dependencies]
-pytest = ">=8.0"
+pytest = ">=9.0,<10.0"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

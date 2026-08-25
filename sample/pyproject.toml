@@ -20,4 +20,5 @@ dev = [
 testpaths = [
     "packages/shared_lib/tests",
     "packages/app/tests",
+    "tests",
 ]
