@@ -1,0 +1,21 @@
+[project]
+name = "shared-lib"
+version = "0.1.0"
+description = "Reusable greeting helpers consumed by the sample app (Poetry-isolated build)."
+requires-python = ">=3.11"
+authors = [{ name = "vytharion" }]
+dependencies = []
+
+[tool.poetry]
+package-mode = true
+packages = [{ include = "shared_lib", from = "src" }]
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,25 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Downstream service that imports the shared library (Poetry-isolated build)."
+requires-python = ">=3.11"
+authors = [{ name = "vytharion" }]
+dynamic = ["dependencies"]
+
+[tool.poetry]
+package-mode = true
+packages = [{ include = "app", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.11"
+shared-lib = { path = "../shared_lib", develop = true }
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=8.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=1.9.0"]
+build-backend = "poetry.core.masonry.api"
