@@ -1,0 +1,46 @@
+name: ci-poetry
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [shared_lib, app]
+    defaults:
+      run:
+        working-directory: poetry-sample/packages/${{ matrix.package }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Poetry
+        run: pipx install poetry==1.8.3
+
+      # Each package owns its own poetry.lock, so each matrix leg
+      # gets its own cache key. The workspace cannot share a single
+      # cache entry the way uv does — that fan-out is the point.
+      - name: Restore Poetry cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pypoetry
+          key: poetry-${{ runner.os }}-${{ matrix.package }}-${{ hashFiles(format('poetry-sample/packages/{0}/poetry.lock', matrix.package)) }}
+          restore-keys: |
+            poetry-${{ runner.os }}-${{ matrix.package }}-
+
+      - name: Poetry install
+        run: poetry install --no-interaction
+
+      - name: Run tests
+        run: poetry run pytest -q
