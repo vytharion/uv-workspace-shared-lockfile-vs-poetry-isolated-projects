@@ -4,7 +4,7 @@ from shared_lib import greet
 
 
 def welcome(name: str) -> str:
-    return f"[app] {greet(name)}"
+    return f"[app] {greet(name, 'Hello')}"
 
 
 def run() -> None:

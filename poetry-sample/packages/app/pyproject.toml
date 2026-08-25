@@ -12,7 +12,7 @@ packages = [{ include = "app", from = "src" }]
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-shared-lib = { path = "../shared_lib", develop = true }
+shared-lib = { path = "../shared_lib", develop = true, version = "^0.2.0" }
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=9.0,<10.0"
