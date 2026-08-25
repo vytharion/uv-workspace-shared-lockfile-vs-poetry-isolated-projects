@@ -1,0 +1,23 @@
+[project]
+name = "sample-workspace"
+version = "0.1.0"
+description = "uv workspace root that pins shared_lib and app under one shared lockfile."
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "packages/shared_lib/tests",
+    "packages/app/tests",
+]
