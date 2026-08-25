@@ -24,3 +24,6 @@ __pycache__/
 .vite/
 coverage/
 .venv/
+
+# Transient bench harness caches (bench_install.py)
+.bench-cache/
